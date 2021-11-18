@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		972BC30027466C910042C7A1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BC2FF27466C910042C7A1 /* RegisterViewController.swift */; };
 		976D5C8A27463DF800A400D4 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D5C8927463DF800A400D4 /* ScoreViewController.swift */; };
 		97E3BDEF274601B60093A544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BDEE274601B60093A544 /* AppDelegate.swift */; };
 		97E3BDF1274601B60093A544 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BDF0274601B60093A544 /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 		97E3BE372746108E0093A544 /* AutonomousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE362746108E0093A544 /* AutonomousViewController.swift */; };
 		97E3BE3C274611860093A544 /* DriverControlledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE3B274611860093A544 /* DriverControlledViewController.swift */; };
 		97E3BE41274611B10093A544 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE40274611B10093A544 /* EndGameViewController.swift */; };
+		97FB7EA32746628E00512F88 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FB7EA22746628E00512F88 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		972BC2FF27466C910042C7A1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		976D5C8927463DF800A400D4 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		97E3BDEB274601B60093A544 /* Assignment 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Assignment 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E3BDEE274601B60093A544 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		97E3BE362746108E0093A544 /* AutonomousViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutonomousViewController.swift; sourceTree = "<group>"; };
 		97E3BE3B274611860093A544 /* DriverControlledViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverControlledViewController.swift; sourceTree = "<group>"; };
 		97E3BE40274611B10093A544 /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
+		97FB7EA22746628E00512F88 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 		97E3BDED274601B60093A544 /* Assignment 2 */ = {
 			isa = PBXGroup;
 			children = (
+				97FB7EA22746628E00512F88 /* SwiftyJSON.swift */,
 				97E3BDEE274601B60093A544 /* AppDelegate.swift */,
 				97E3BDF0274601B60093A544 /* SceneDelegate.swift */,
 				97E3BDF2274601B60093A544 /* ViewController.swift */,
@@ -127,6 +132,7 @@
 				97E3BE3B274611860093A544 /* DriverControlledViewController.swift */,
 				97E3BE40274611B10093A544 /* EndGameViewController.swift */,
 				976D5C8927463DF800A400D4 /* ScoreViewController.swift */,
+				972BC2FF27466C910042C7A1 /* RegisterViewController.swift */,
 			);
 			path = "Assignment 2";
 			sourceTree = "<group>";
@@ -281,8 +287,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				97E3BE3C274611860093A544 /* DriverControlledViewController.swift in Sources */,
+				972BC30027466C910042C7A1 /* RegisterViewController.swift in Sources */,
 				97E3BE372746108E0093A544 /* AutonomousViewController.swift in Sources */,
 				97E3BDF3274601B60093A544 /* ViewController.swift in Sources */,
+				97FB7EA32746628E00512F88 /* SwiftyJSON.swift in Sources */,
 				97E3BE2A27460F420093A544 /* DataManager.swift in Sources */,
 				97E3BDEF274601B60093A544 /* AppDelegate.swift in Sources */,
 				97E3BDF1274601B60093A544 /* SceneDelegate.swift in Sources */,
