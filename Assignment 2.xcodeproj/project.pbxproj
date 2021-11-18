@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		976D5C8A27463DF800A400D4 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D5C8927463DF800A400D4 /* ScoreViewController.swift */; };
 		97E3BDEF274601B60093A544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BDEE274601B60093A544 /* AppDelegate.swift */; };
 		97E3BDF1274601B60093A544 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BDF0274601B60093A544 /* SceneDelegate.swift */; };
 		97E3BDF3274601B60093A544 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BDF2274601B60093A544 /* ViewController.swift */; };
@@ -16,6 +17,11 @@
 		97E3BDFE274601B70093A544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97E3BDFC274601B70093A544 /* LaunchScreen.storyboard */; };
 		97E3BE09274601B70093A544 /* Assignment_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE08274601B70093A544 /* Assignment_2Tests.swift */; };
 		97E3BE14274601B70093A544 /* Assignment_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE13274601B70093A544 /* Assignment_2UITests.swift */; };
+		97E3BE25274607E80093A544 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 97E3BE24274607E80093A544 /* splash.png */; };
+		97E3BE2A27460F420093A544 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE2927460F420093A544 /* DataManager.swift */; };
+		97E3BE372746108E0093A544 /* AutonomousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE362746108E0093A544 /* AutonomousViewController.swift */; };
+		97E3BE3C274611860093A544 /* DriverControlledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE3B274611860093A544 /* DriverControlledViewController.swift */; };
+		97E3BE41274611B10093A544 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3BE40274611B10093A544 /* EndGameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		976D5C8927463DF800A400D4 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		97E3BDEB274601B60093A544 /* Assignment 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Assignment 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E3BDEE274601B60093A544 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97E3BDF0274601B60093A544 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +58,11 @@
 		97E3BE0F274601B70093A544 /* Assignment 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Assignment 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E3BE13274601B70093A544 /* Assignment_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment_2UITests.swift; sourceTree = "<group>"; };
 		97E3BE15274601B70093A544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97E3BE24274607E80093A544 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		97E3BE2927460F420093A544 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		97E3BE362746108E0093A544 /* AutonomousViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutonomousViewController.swift; sourceTree = "<group>"; };
+		97E3BE3B274611860093A544 /* DriverControlledViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverControlledViewController.swift; sourceTree = "<group>"; };
+		97E3BE40274611B10093A544 /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +93,7 @@
 		97E3BDE2274601B60093A544 = {
 			isa = PBXGroup;
 			children = (
+				97E3BE24274607E80093A544 /* splash.png */,
 				97E3BDED274601B60093A544 /* Assignment 2 */,
 				97E3BE07274601B70093A544 /* Assignment 2Tests */,
 				97E3BE12274601B70093A544 /* Assignment 2UITests */,
@@ -109,6 +122,11 @@
 				97E3BDFC274601B70093A544 /* LaunchScreen.storyboard */,
 				97E3BDFF274601B70093A544 /* Info.plist */,
 				97E3BDF7274601B60093A544 /* Assignment_2.xcdatamodeld */,
+				97E3BE2927460F420093A544 /* DataManager.swift */,
+				97E3BE362746108E0093A544 /* AutonomousViewController.swift */,
+				97E3BE3B274611860093A544 /* DriverControlledViewController.swift */,
+				97E3BE40274611B10093A544 /* EndGameViewController.swift */,
+				976D5C8927463DF800A400D4 /* ScoreViewController.swift */,
 			);
 			path = "Assignment 2";
 			sourceTree = "<group>";
@@ -234,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E3BE25274607E80093A544 /* splash.png in Resources */,
 				97E3BDFE274601B70093A544 /* LaunchScreen.storyboard in Resources */,
 				97E3BDFB274601B70093A544 /* Assets.xcassets in Resources */,
 				97E3BDF6274601B60093A544 /* Main.storyboard in Resources */,
@@ -261,10 +280,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E3BE3C274611860093A544 /* DriverControlledViewController.swift in Sources */,
+				97E3BE372746108E0093A544 /* AutonomousViewController.swift in Sources */,
 				97E3BDF3274601B60093A544 /* ViewController.swift in Sources */,
+				97E3BE2A27460F420093A544 /* DataManager.swift in Sources */,
 				97E3BDEF274601B60093A544 /* AppDelegate.swift in Sources */,
 				97E3BDF1274601B60093A544 /* SceneDelegate.swift in Sources */,
+				97E3BE41274611B10093A544 /* EndGameViewController.swift in Sources */,
 				97E3BDF9274601B60093A544 /* Assignment_2.xcdatamodeld in Sources */,
+				976D5C8A27463DF800A400D4 /* ScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
