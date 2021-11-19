@@ -42,58 +42,83 @@ class DataManager: NSObject {
     var end_parking_warehouse: Bool = false
     var end_completely_in_warehouse: Bool = false
     
+    //World record list
+    struct HighScoreTeams: Equatable {
+        var id: String
+        var teamid: String
+        var autonomous: String
+        var drivercontrolled: String
+        var endgame: String
+        var score: String
+        var location: String
+    }
+    
+    var AllHighScores = [String]()
+    
+    var highscores: [String] {
+        get { return AllHighScores }
+    }
+    
     //Team info
-    var addedteamName: String = ""
-    var addedteamID: Int = 0
-    var addedlocation: String = ""
-    var addedimageView: UIImageView = UIImageView()
+    /*
     struct TeamInfo: Equatable {    //Allow different TeamInfo struct objects to be compared
         var teamName: String
         var teamID: Int
         var location: String
-        var imageView: UIImageView
+        var imageView: UIImage
     }
-    var AllTeamInfos = [TeamInfo]()
+    var one_team_info = TeamInfo(teamName: "", teamID: 0, location: "", imageView: UIImage())
     
+    var AllTeamInfos = [TeamInfo]()
+    */
     override init() {
         super.init()
+        
+        //loadTeamInfoFromData()
         
         let url = NSURL(string: "http://www.partiklezoo.com/freightfrenzy/?")
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: url! as URL, completionHandler:
-            {(data, response, error) in
+                                        { (data, response, error) in
             if (error != nil) { return; }
             if let json = try? JSON(data: data!) {
                 for count in 0...json.count - 1 {
                     print(json[count]["score"].string!)
+                    //let row = json[count]
+                    //let obj = HighScoreTeams(id: row["id"].string!, teamid: row["teamid"].string!, autonomous: row["autonomous"].string!, drivercontrolled: row["drivercontrolled"].string!, endgame: row["endgame"].string!, score: row["score"].string!, location: row["location"].string!)
+                    //print(obj.score)
+                    //AllHighScores.append(json[count]["score"].string!)
                 }
             }
         })
         task.resume()
+        print(AllHighScores)
     }
-    
-    func addTeamInfo(teaminfo: TeamInfo){
+    /*
+    func addTeamInfo(){
         var exist_check: Bool = false
-        for TeamInfo in AllTeamInfos {
-            if (teaminfo.teamID == TeamInfo.teamID) && (teaminfo.teamName == TeamInfo.teamName) {
+        for OneTeamInfo in AllTeamInfos {
+            if (one_team_info.teamID == OneTeamInfo.teamID) && (one_team_info.teamName == OneTeamInfo.teamName) {
                 exist_check = true
             }
         }
-        if (!AllTeamInfos.contains(teaminfo)) && !exist_check {
+        if (!AllTeamInfos.contains(one_team_info)) && !exist_check {
             let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             
             let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
             
             let teaminfodata = NSManagedObject(entity: entity!, insertInto: managedContext)
-            teaminfodata.setValue(teaminfo.imageView, forKey: "image")
-            teaminfodata.setValue(teaminfo.location, forKey: "location")
-            teaminfodata.setValue(teaminfo.teamID, forKey: "teamID")
-            teaminfodata.setValue(teaminfo.teamName, forKey: "teamName")
+            teaminfodata.setValue(one_team_info.imageView, forKey: "image")
+            teaminfodata.setValue(one_team_info.location, forKey: "location")
+            teaminfodata.setValue(one_team_info.teamID, forKey: "teamID")
+            teaminfodata.setValue(one_team_info.teamName, forKey: "teamName")
+            
+            print("Successfully added new profile")
             
             do {
                 try managedContext.save()
-                AllTeamInfos.append(teaminfo)
+                AllTeamInfos.append(one_team_info)
             }
             catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
@@ -113,7 +138,7 @@ class DataManager: NSObject {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
                 let record = result as! NSManagedObject
-                let element: TeamInfo = TeamInfo(teamName: record.value(forKey: "teamName") as! String, teamID: record.value(forKey: "teamID") as! Int, location: record.value(forKey: "location") as! String, imageView: record.value(forKey: "image") as! UIImageView)
+                let element: TeamInfo = TeamInfo(teamName: record.value(forKey: "teamName") as! String, teamID: record.value(forKey: "teamID") as! Int, location: record.value(forKey: "location") as! String, imageView: record.value(forKey: "image") as! UIImage)
                 print(element)
                 AllTeamInfos.append(element)
             }
@@ -121,5 +146,5 @@ class DataManager: NSObject {
         catch let error as NSError {
             print("Could not load. \(error), \(error.userInfo)")
         }
-    }
+    }*/
 }

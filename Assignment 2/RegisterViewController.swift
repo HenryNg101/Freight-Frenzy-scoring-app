@@ -7,6 +7,12 @@
 
 import UIKit
 
+extension String  {
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+}
+
 class RegisterViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var teamName: UITextField!
@@ -14,6 +20,15 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var imageViewTapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var sucess_notification: UILabel!
+    
+    struct TeamInfo: Equatable {    //Allow different TeamInfo struct objects to be compared
+        var teamName: String
+        var teamID: Int
+        var location: String
+        var imageView: UIImage
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +74,19 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    /*
+    @IBAction func AddTeamInfo(_ sender: UIButton) {
+        let addedteamName = teamName.text
+        let addedteamID = Int(teamID.text ?? "0")
+        let addedlocation = location.text
+        let addedimage: UIImage = imageView.image ?? UIImage(imageLiteralResourceName: "upload_image.png")
+        DataManager.shared.one_team_info.teamName = addedteamName ?? ""
+        DataManager.shared.one_team_info.teamID = addedteamID ?? 0
+        DataManager.shared.one_team_info.location = addedlocation ?? ""
+        DataManager.shared.one_team_info.imageView = addedimage
+        sucess_notification.text = "Successfully registered"
+    }*/
     
     /*
     // MARK: - Navigation
