@@ -7,28 +7,51 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class RegisterViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var teamName: UITextField!
+    @IBOutlet weak var teamID: UITextField!
+    @IBOutlet weak var location: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var imageViewTapGesture: UITapGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        teamName.delegate = self
+        teamID.delegate = self
+        location.delegate = self
+        
+        //Add tap gesture and allow user interaction with image, with this tap gesture I can tap image to do actions, and a border to know where to upload image.
+        imageView.addGestureRecognizer(imageViewTapGesture)
+        imageView.isUserInteractionEnabled = true
+        imageView.layer.borderWidth = 1
     }
     
-    @IBAction func OpenCameraRoll(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+    //End editing when touch Return key.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    //End the editing when touch anywhere but not the text field
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    //Open camera roll when touch the tap gesture on the image
+    @IBAction func OpenCameraRoll(_ sender: UITapGestureRecognizer) {
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)) && ((sender.view as? UIImageView) != nil) {
             let imagePicker = UIImagePickerController()
             
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = true
             
             present(imagePicker, animated: true, completion: nil)
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imageView.image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         dismiss(animated: true, completion: nil)
     }

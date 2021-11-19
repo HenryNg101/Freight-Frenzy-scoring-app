@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DataManager: NSObject {
     static let shared = DataManager()
@@ -41,6 +42,19 @@ class DataManager: NSObject {
     var end_parking_warehouse: Bool = false
     var end_completely_in_warehouse: Bool = false
     
+    //Team info
+    var addedteamName: String = ""
+    var addedteamID: Int = 0
+    var addedlocation: String = ""
+    var addedimageView: UIImageView = UIImageView()
+    struct TeamInfo: Equatable {    //Allow different TeamInfo struct objects to be compared
+        var teamName: String
+        var teamID: Int
+        var location: String
+        var imageView: UIImageView
+    }
+    var AllTeamInfos = [TeamInfo]()
+    
     override init() {
         super.init()
         
@@ -57,5 +71,55 @@ class DataManager: NSObject {
             }
         })
         task.resume()
+    }
+    
+    func addTeamInfo(teaminfo: TeamInfo){
+        var exist_check: Bool = false
+        for TeamInfo in AllTeamInfos {
+            if (teaminfo.teamID == TeamInfo.teamID) && (teaminfo.teamName == TeamInfo.teamName) {
+                exist_check = true
+            }
+        }
+        if (!AllTeamInfos.contains(teaminfo)) && !exist_check {
+            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
+            
+            let teaminfodata = NSManagedObject(entity: entity!, insertInto: managedContext)
+            teaminfodata.setValue(teaminfo.imageView, forKey: "image")
+            teaminfodata.setValue(teaminfo.location, forKey: "location")
+            teaminfodata.setValue(teaminfo.teamID, forKey: "teamID")
+            teaminfodata.setValue(teaminfo.teamName, forKey: "teamName")
+            
+            do {
+                try managedContext.save()
+                AllTeamInfos.append(teaminfo)
+            }
+            catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+        else {
+            print("Information entered already")
+        }
+    }
+    
+    func loadTeamInfoFromData(){
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
+        
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            for result in results {
+                let record = result as! NSManagedObject
+                let element: TeamInfo = TeamInfo(teamName: record.value(forKey: "teamName") as! String, teamID: record.value(forKey: "teamID") as! Int, location: record.value(forKey: "location") as! String, imageView: record.value(forKey: "image") as! UIImageView)
+                print(element)
+                AllTeamInfos.append(element)
+            }
+        }
+        catch let error as NSError {
+            print("Could not load. \(error), \(error.userInfo)")
+        }
     }
 }

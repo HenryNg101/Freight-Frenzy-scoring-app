@@ -178,18 +178,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-Lj-Qbo">
-                                <rect key="frame" x="20" y="405" width="374" height="356"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upload_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-Lj-Qbo">
+                                <rect key="frame" x="20" y="402" width="374" height="356"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pat-4A-OeU">
-                                <rect key="frame" x="158" y="769" width="99" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select a photo"/>
+                                <gestureRecognizers/>
                                 <connections>
-                                    <action selector="OpenCameraRoll:" destination="vFS-FI-RLg" eventType="touchUpInside" id="L9a-h8-HPQ"/>
+                                    <outletCollection property="gestureRecognizers" destination="eXi-or-ZX9" appends="YES" id="33x-vg-PmN"/>
                                 </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ywi-qf-k30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -197,9 +193,18 @@
                     <navigationItem key="navigationItem" title="Registration" id="89r-y9-ZZs"/>
                     <connections>
                         <outlet property="imageView" destination="hsE-Lj-Qbo" id="YkH-6i-uGb"/>
+                        <outlet property="imageViewTapGesture" destination="eXi-or-ZX9" id="Iw4-vb-N68"/>
+                        <outlet property="location" destination="JiV-Pg-Si2" id="c8z-qY-da6"/>
+                        <outlet property="teamID" destination="rC2-Dc-jaV" id="rLV-CM-9Ky"/>
+                        <outlet property="teamName" destination="Tc0-JB-R5C" id="eSZ-xh-JvY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yub-HR-sUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eXi-or-ZX9">
+                    <connections>
+                        <action selector="OpenCameraRoll:" destination="vFS-FI-RLg" id="oNy-yp-2sA"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="224.63768115942031" y="-619.41964285714278"/>
         </scene>
@@ -789,6 +794,7 @@
     </scenes>
     <resources>
         <image name="splash.png" width="219" height="230"/>
+        <image name="upload_image.png" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
