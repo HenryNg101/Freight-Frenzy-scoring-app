@@ -8,7 +8,7 @@
 import UIKit
 
 class HighScoreTableViewCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +19,4 @@ class HighScoreTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageView.image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        imageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         dismiss(animated: true, completion: nil)
     }
     
