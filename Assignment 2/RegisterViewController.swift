@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var robotName: UITextField!
     @IBOutlet weak var ErrorLabel: UILabel!
+    @IBOutlet weak var allow_sharing: UISwitch!
     @IBOutlet var imageViewTapGesture: UITapGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +68,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
         if (teamName.text != nil && teamName.text != "") && (teamID.text != nil && teamID.text != "") {
             if teamID.text?.count == 5 && Int(teamID.text ?? "") != nil {
                 let png = ((self.imageView.image?.pngData() ?? UIImage(named: "upload_image.png")?.pngData())) ?? Data()
-                
-                DataManager.shared.addteamInfo(teamName: teamName.text ?? "", teamID: teamID.text ?? "", location: location.text ?? "", robotName: robotName.text ?? "", image: png)
+                DataManager.shared.addteamInfo(teamName: teamName.text ?? "", teamID: teamID.text ?? "", location: location.text ?? "", robotName: robotName.text ?? "", image: png, allow_sharing: allow_sharing.isOn)
                 ErrorLabel.text = "Sucessfully registered"
             }
             else {

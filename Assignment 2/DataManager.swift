@@ -49,6 +49,7 @@ class DataManager: NSObject {
         var region: String
         var robotName: String
         var image: Data
+        var allow_sharing: Bool
     }
     var registered_profiles: [RegisterInfo] = []
     
@@ -83,22 +84,19 @@ class DataManager: NSObject {
         //deleteAllInfo()
     }
     
-    //This function is only used when I need to reset my database, for testing and development
+    //This function is only used when I need to reset my database, for testing and development. So, whenever the core data is messed up, call this method in init() and its done.
     func deleteAllInfo() {
-        let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
-        let info = NSManagedObject(entity: entity!, insertInto: managedContext)
-        managedContext.delete(info)
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Team_Info")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
-            try managedContext.save()
-            //registered_profiles.append(newInfo)
-        }
-        catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            try managedContext.persistentStoreCoordinator?.execute(deleteRequest, with: managedContext)
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
         }
     }
     
-    func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data) {
-        let newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image)
+    func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data, allow_sharing: Bool) {
+        let newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image, allow_sharing: allow_sharing)
         var check = true
         for profile in registered_profiles {
             if profile.id == newInfo.id && profile.name == newInfo.name {
@@ -113,6 +111,7 @@ class DataManager: NSObject {
             info.setValue(newInfo.robotName, forKey: "robotName")
             info.setValue(newInfo.id, forKey: "teamID")
             info.setValue(newInfo.name, forKey: "teamName")
+            info.setValue(newInfo.allow_sharing, forKey: "allow_sharing")
             
             do {
                 try managedContext.save()
@@ -136,7 +135,8 @@ class DataManager: NSObject {
                 print(record.value(forKey: "robotName") as! String)
                 print(record.value(forKey: "teamID") as! String)
                 print(record.value(forKey: "teamName") as! String)
-                registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data))
+                print(record.value(forKey: "allow_sharing") as! Bool)
+                registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data, allow_sharing: record.value(forKey: "allow_sharing") as! Bool))
             }
         }
         catch let error as NSError {

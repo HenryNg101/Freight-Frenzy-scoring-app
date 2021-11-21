@@ -395,14 +395,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upload_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-Lj-Qbo">
-                                <rect key="frame" x="20" y="449" width="374" height="307"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="eXi-or-ZX9" appends="YES" id="33x-vg-PmN"/>
-                                </connections>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Robot Optional) :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di9-94-NQ6">
                                 <rect key="frame" x="20" y="354" width="129" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -438,6 +430,25 @@
                                     <segue destination="GIF-hc-pZH" kind="show" id="4Yr-1B-qen"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upload_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-Lj-Qbo">
+                                <rect key="frame" x="20" y="436" width="374" height="306"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eXi-or-ZX9" appends="YES" id="33x-vg-PmN"/>
+                                </connections>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GFA-ts-Gev">
+                                <rect key="frame" x="347" y="745" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow sharing score with other teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKY-JJ-yva">
+                                <rect key="frame" x="20" y="750" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ywi-qf-k30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -445,6 +456,7 @@
                     <navigationItem key="navigationItem" title="Registration" id="89r-y9-ZZs"/>
                     <connections>
                         <outlet property="ErrorLabel" destination="Egy-z8-4Co" id="2jg-CN-frD"/>
+                        <outlet property="allow_sharing" destination="GFA-ts-Gev" id="aN8-98-QLj"/>
                         <outlet property="imageView" destination="hsE-Lj-Qbo" id="YkH-6i-uGb"/>
                         <outlet property="imageViewTapGesture" destination="eXi-or-ZX9" id="Iw4-vb-N68"/>
                         <outlet property="location" destination="JiV-Pg-Si2" id="c8z-qY-da6"/>
