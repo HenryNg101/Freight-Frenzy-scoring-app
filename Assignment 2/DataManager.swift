@@ -43,7 +43,14 @@ class DataManager: NSObject {
     var end_completely_in_warehouse: Bool = false
     
     //Team info (For registering)
-    var
+    struct RegisterInfo {
+        var name: String
+        var id: String
+        var region: String
+        var robotName: String
+        var image: Data
+    }
+    var registered_profiles: [RegisterInfo] = []
     
     //High scores
     //One more note, there are more teams in total than teams in highscore list (427 vs 100)
@@ -66,15 +73,60 @@ class DataManager: NSObject {
     var high_scores: [HighScoreTeam] = []
     var all_teams: [TeamInfo] = []
     
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override init() {
         super.init()
+        print(type(of: DataManager.RegisterInfo.self))
+        
+        loadTeamInfosFromCoreData()
     }
     
-    func addteamInfo() {
-        
+    func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data) {
+        let newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image)
+        var check = true
+        for profile in registered_profiles {
+            if profile.id == newInfo.id && profile.name == newInfo.name {
+                check = false
+            }
+        }
+        if check {
+            let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
+            let info = NSManagedObject(entity: entity!, insertInto: managedContext)
+            info.setValue(newInfo.image, forKey: "image")
+            info.setValue(newInfo.region, forKey: "region")
+            info.setValue(newInfo.robotName, forKey: "robotName")
+            info.setValue(newInfo.id, forKey: "teamID")
+            info.setValue(newInfo.name, forKey: "teamName")
+            
+            do {
+                try managedContext.save()
+                registered_profiles.append(newInfo)
+            }
+            catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
     }
     
-    func loadTeamInfosFromData(){
+    func loadTeamInfosFromCoreData(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
         
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            for result in results {
+                let record = result as! NSManagedObject
+                //print(record.value(forKey: "image"))
+                print(record.value(forKey: "region") as! String)
+                print(record.value(forKey: "robotName") as! String)
+                print(record.value(forKey: "teamID") as! String)
+                print(record.value(forKey: "teamName") as! String)
+                print()
+                /*registered_profiles.append(record.value(forKey: "image") as! UIImage, record.value(forKey: "region") as! String, record.value(forKey: "robotName") as! String )*/
+            }
+        }
+        catch let error as NSError {
+            print("Could not load. \(error), \(error.userInfo)")
+        }
     }
 }

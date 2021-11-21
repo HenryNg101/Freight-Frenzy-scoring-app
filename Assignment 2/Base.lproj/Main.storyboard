@@ -304,6 +304,22 @@
             </objects>
             <point key="canvasLocation" x="1915.9420289855075" y="794.86607142857144"/>
         </scene>
+        <!--Registered Teams-->
+        <scene sceneID="MeE-Ks-e0C">
+            <objects>
+                <viewController id="GIF-hc-pZH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SIQ-U8-w5A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="36S-yi-3hb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Registered Teams" id="e6L-Lt-tkF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jZa-dP-tci" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-604" y="-619"/>
+        </scene>
         <!--Registration-->
         <scene sceneID="RU1-jg-2X5">
             <objects>
@@ -334,9 +350,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jw-vC-XlQ">
-                                <rect key="frame" x="174" y="825" width="66" height="30"/>
+                                <rect key="frame" x="174" y="784" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add team"/>
+                                <connections>
+                                    <action selector="AddTeam:" destination="vFS-FI-RLg" eventType="touchUpInside" id="COT-zF-cgP"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Team name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tc0-JB-R5C">
                                 <rect key="frame" x="153" y="159" width="241" height="34"/>
@@ -357,7 +376,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upload_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-Lj-Qbo">
-                                <rect key="frame" x="20" y="449" width="374" height="356"/>
+                                <rect key="frame" x="20" y="449" width="374" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -384,15 +403,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egy-z8-4Co">
+                                <rect key="frame" x="186" y="841" width="0.0" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwf-5P-Lub">
+                                <rect key="frame" x="146" y="832" width="123" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Registered Teams"/>
+                                <connections>
+                                    <segue destination="GIF-hc-pZH" kind="show" id="4Yr-1B-qen"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ywi-qf-k30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Registration" id="89r-y9-ZZs"/>
                     <connections>
+                        <outlet property="ErrorLabel" destination="Egy-z8-4Co" id="2jg-CN-frD"/>
                         <outlet property="imageView" destination="hsE-Lj-Qbo" id="YkH-6i-uGb"/>
                         <outlet property="imageViewTapGesture" destination="eXi-or-ZX9" id="Iw4-vb-N68"/>
                         <outlet property="location" destination="JiV-Pg-Si2" id="c8z-qY-da6"/>
+                        <outlet property="robotName" destination="Sj5-KJ-1wn" id="6Sz-c1-8RZ"/>
                         <outlet property="teamID" destination="rC2-Dc-jaV" id="rLV-CM-9Ky"/>
                         <outlet property="teamName" destination="Tc0-JB-R5C" id="eSZ-xh-JvY"/>
                     </connections>

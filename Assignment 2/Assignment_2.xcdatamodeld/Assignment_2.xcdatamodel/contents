@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Team_Info" representedClassName="Team_Info" syncable="YES" codeGenerationType="class">
-        <attribute name="image" optional="YES" attributeType="Binary"/>
-        <attribute name="location" optional="YES" attributeType="String"/>
-        <attribute name="teamID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="region" optional="YES" attributeType="String"/>
+        <attribute name="robotName" optional="YES" attributeType="String"/>
+        <attribute name="teamID" optional="YES" attributeType="String"/>
+        <attribute name="teamName" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Team_Info" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Team_Info" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

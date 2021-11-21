@@ -13,6 +13,8 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var teamID: UITextField!
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var robotName: UITextField!
+    @IBOutlet weak var ErrorLabel: UILabel!
     @IBOutlet var imageViewTapGesture: UITapGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
         teamName.delegate = self
         teamID.delegate = self
         location.delegate = self
+        robotName.delegate = self
         
         //Add tap gesture and allow user interaction with image, with this tap gesture I can tap image to do actions, and a border to know where to upload image.
         imageView.addGestureRecognizer(imageViewTapGesture)
@@ -58,6 +61,21 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func AddTeam(_ sender: UIButton) {
+        if teamName.text != nil && teamID.text != nil {
+            if teamID.text?.count == 5 && Int(teamID.text ?? "") != nil {
+                let png = ((self.imageView.image?.pngData() ?? UIImage(named: "upload_image.png")?.pngData())) ?? Data()
+                DataManager.shared.addteamInfo(teamName: teamName.text ?? "", teamID: teamID.text ?? "", location: location.text ?? "", robotName: robotName.text ?? "", image: png)
+            }
+            else {
+                ErrorLabel.text = "Invalid ID"
+            }
+        }
+        else {
+            ErrorLabel.text = "Insufficient information"
+        }
     }
     
     /*
