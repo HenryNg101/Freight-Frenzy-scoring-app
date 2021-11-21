@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0734F8112749EF7D00D3CF39 /* RegisteredTeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0734F8102749EF7D00D3CF39 /* RegisteredTeamsViewController.swift */; };
 		972BC30027466C910042C7A1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BC2FF27466C910042C7A1 /* RegisterViewController.swift */; };
 		976D5C8A27463DF800A400D4 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D5C8927463DF800A400D4 /* ScoreViewController.swift */; };
 		97A35F952748A48C00B6AA0C /* HighScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A35F942748A48C00B6AA0C /* HighScoreViewController.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0734F8102749EF7D00D3CF39 /* RegisteredTeamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredTeamsViewController.swift; sourceTree = "<group>"; };
 		972BC2FF27466C910042C7A1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		976D5C8927463DF800A400D4 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		97A35F942748A48C00B6AA0C /* HighScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				97A35F942748A48C00B6AA0C /* HighScoreViewController.swift */,
 				97A35F992748AE5000B6AA0C /* HighScoreTableViewCell.swift */,
 				97A35FA12748D28A00B6AA0C /* HighScoreTeamViewController.swift */,
+				0734F8102749EF7D00D3CF39 /* RegisteredTeamsViewController.swift */,
 			);
 			path = "Assignment 2";
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				97E3BE2A27460F420093A544 /* DataManager.swift in Sources */,
 				97E3BDEF274601B60093A544 /* AppDelegate.swift in Sources */,
 				97E3BDF1274601B60093A544 /* SceneDelegate.swift in Sources */,
+				0734F8112749EF7D00D3CF39 /* RegisteredTeamsViewController.swift in Sources */,
 				97A35F9A2748AE5000B6AA0C /* HighScoreTableViewCell.swift in Sources */,
 				97E3BE41274611B10093A544 /* EndGameViewController.swift in Sources */,
 				97A35FA22748D28A00B6AA0C /* HighScoreTeamViewController.swift in Sources */,

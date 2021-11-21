@@ -80,6 +80,21 @@ class DataManager: NSObject {
         print(type(of: DataManager.RegisterInfo.self))
         
         loadTeamInfosFromCoreData()
+        //deleteAllInfo()
+    }
+    
+    //This function is only used when I need to reset my database, for testing and development
+    func deleteAllInfo() {
+        let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
+        let info = NSManagedObject(entity: entity!, insertInto: managedContext)
+        managedContext.delete(info)
+        do {
+            try managedContext.save()
+            //registered_profiles.append(newInfo)
+        }
+        catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data) {
@@ -116,13 +131,12 @@ class DataManager: NSObject {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
                 let record = result as! NSManagedObject
-                //print(record.value(forKey: "image"))
+                print(UIImage(data: record.value(forKey: "image") as! Data))
                 print(record.value(forKey: "region") as! String)
                 print(record.value(forKey: "robotName") as! String)
                 print(record.value(forKey: "teamID") as! String)
                 print(record.value(forKey: "teamName") as! String)
-                print()
-                /*registered_profiles.append(record.value(forKey: "image") as! UIImage, record.value(forKey: "region") as! String, record.value(forKey: "robotName") as! String )*/
+                registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data))
             }
         }
         catch let error as NSError {

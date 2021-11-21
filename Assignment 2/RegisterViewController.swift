@@ -64,10 +64,12 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @IBAction func AddTeam(_ sender: UIButton) {
-        if teamName.text != nil && teamID.text != nil {
+        if (teamName.text != nil && teamName.text != "") && (teamID.text != nil && teamID.text != "") {
             if teamID.text?.count == 5 && Int(teamID.text ?? "") != nil {
                 let png = ((self.imageView.image?.pngData() ?? UIImage(named: "upload_image.png")?.pngData())) ?? Data()
+                
                 DataManager.shared.addteamInfo(teamName: teamName.text ?? "", teamID: teamID.text ?? "", location: location.text ?? "", robotName: robotName.text ?? "", image: png)
+                ErrorLabel.text = "Sucessfully registered"
             }
             else {
                 ErrorLabel.text = "Invalid ID"
