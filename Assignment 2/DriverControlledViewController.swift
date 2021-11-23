@@ -14,6 +14,7 @@ class DriverControlledViewController: UIViewController {
     @IBOutlet weak var freight_l2: UILabel!
     @IBOutlet weak var freight_l3: UILabel!
     @IBOutlet weak var shared_hub_freight: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

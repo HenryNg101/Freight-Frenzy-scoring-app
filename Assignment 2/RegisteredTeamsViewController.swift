@@ -8,12 +8,10 @@
 import UIKit
 
 class RegisteredTeamsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    var selected_team: DataManager.RegisterInfo? = nil
     
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selected_team = DataManager.shared.registered_profiles[indexPath.row]
+        DataManager.shared.selectedTeam = DataManager.shared.registered_profiles[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

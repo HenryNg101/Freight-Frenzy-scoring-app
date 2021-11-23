@@ -53,6 +53,10 @@ class DataManager: NSObject {
     }
     var registered_profiles: [RegisterInfo] = []
     
+    //Selected Team
+    var selectedTeam: RegisterInfo? = nil
+    var selectedHighScoreTeam: HighScoreTeam? = nil
+    
     //High scores
     //One more note, there are more teams in total than teams in highscore list (427 vs 100)
     struct TeamInfo {
@@ -95,6 +99,7 @@ class DataManager: NSObject {
         }
     }
     
+    //Register new team, add the new team to the Core Data
     func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data, allow_sharing: Bool) {
         let newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image, allow_sharing: allow_sharing)
         var check = true
@@ -125,17 +130,20 @@ class DataManager: NSObject {
     
     func loadTeamInfosFromCoreData(){
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
-        
         do {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
                 let record = result as! NSManagedObject
+                
+                //print for debugging purpose
                 print(UIImage(data: record.value(forKey: "image") as! Data))
                 print(record.value(forKey: "region") as! String)
                 print(record.value(forKey: "robotName") as! String)
                 print(record.value(forKey: "teamID") as! String)
                 print(record.value(forKey: "teamName") as! String)
                 print(record.value(forKey: "allow_sharing") as! Bool)
+                
+                //Load data from Core Data
                 registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data, allow_sharing: record.value(forKey: "allow_sharing") as! Bool))
             }
         }

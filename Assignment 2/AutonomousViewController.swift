@@ -18,6 +18,7 @@ class AutonomousViewController: UIViewController {
     @IBOutlet weak var freight_shipping_hub: UISwitch!
     @IBOutlet weak var duck_used: UISwitch!
     @IBOutlet weak var team_scoring_elem_used: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

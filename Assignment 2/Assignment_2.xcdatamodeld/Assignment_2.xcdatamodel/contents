@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H1519" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Team_Info" representedClassName="Team_Info" syncable="YES" codeGenerationType="class">
         <attribute name="allow_sharing" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -8,7 +8,9 @@
         <attribute name="teamID" optional="YES" attributeType="String"/>
         <attribute name="teamName" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Team_Scores" representedClassName="Team_Scores" syncable="YES" codeGenerationType="class"/>
     <elements>
         <element name="Team_Info" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Team_Scores" positionX="-63" positionY="36" width="128" height="29"/>
     </elements>
 </model>

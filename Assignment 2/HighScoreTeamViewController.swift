@@ -19,13 +19,11 @@ class HighScoreTeamViewController: UIViewController {
     @IBOutlet weak var endgame: UILabel!
     @IBOutlet weak var total_score: UILabel!
     
-    var selected_record: DataManager.HighScoreTeam? = nil
-    
     func check_profile() -> DataManager.TeamInfo?{
         for profile in DataManager.shared.all_teams{
-            if profile.id == selected_record?.team_id {
-                if profile.location != selected_record?.location && selected_record?.location == "" {
-                    selected_record?.location = profile.location
+            if profile.id == DataManager.shared.selectedHighScoreTeam?.team_id {
+                if profile.location != DataManager.shared.selectedHighScoreTeam?.location && DataManager.shared.selectedHighScoreTeam?.location == "" {
+                    DataManager.shared.selectedHighScoreTeam?.location = profile.location
                 }
                 return profile
             }
@@ -36,6 +34,7 @@ class HighScoreTeamViewController: UIViewController {
     //Same problem, it doesn't load up the first time, it always load the last click result
     override func viewDidLoad() {
         let profile = check_profile()
+        let selected_record = DataManager.shared.selectedHighScoreTeam
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         team_id.text = selected_record?.team_id

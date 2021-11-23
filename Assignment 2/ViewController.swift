@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         })
         task.resume()
         
+        //All teams, include the one that has no high score.
         url = NSURL(string: "http://www.partiklezoo.com/freightfrenzy/?action=teams")
         session = URLSession(configuration: config)
         task = session.dataTask(with: url! as URL, completionHandler:

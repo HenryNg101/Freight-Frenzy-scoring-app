@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ScoreViewController: UIViewController {
+class ScoreViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var autonomous_score: UILabel!
     @IBOutlet weak var driver_controlled_score: UILabel!
     @IBOutlet weak var endgame_score: UILabel!
     @IBOutlet weak var total_score: UILabel!
+    @IBOutlet weak var submit_score: UIButton!
+    @IBOutlet weak var result_noti: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +34,12 @@ class ScoreViewController: UIViewController {
         driver_controlled_score.text = String(driver_controlled)
         endgame_score.text = String(endgame)
         total_score.text = String(total)
+        
+        //Only allow sharing for teams that choose allow sharing
+        if !(DataManager.shared.selectedTeam?.allow_sharing ?? false) {
+            submit_score.isEnabled = false
+            submit_score.isHidden = true
+        }
     }
     
     //Translate all of those option to integer (0 or 1), then multiply by the provided score, then calculate the sum
@@ -59,6 +69,80 @@ class ScoreViewController: UIViewController {
         return shared_hub_tipped_score + shipping_hub_balanced_score + shipping_hub_capped_score + end_parking_warehouse_score + end_completely_in_warehouse_score + data.ducks_delivered
     }
 
+    //When user want to submit high score to the website
+    @IBAction func submit_score(_ sender: UIButton) {
+        let team_id: String = DataManager.shared.selectedTeam?.id ?? ""
+        let location: String = DataManager.shared.selectedTeam?.region ?? ""
+        print(team_id)
+        print(location)
+        var url_link: String = "https://www.partiklezoo.com/freightfrenzy/?action=addscore&teamid=" + team_id
+        url_link += "&autonomous="
+        url_link += autonomous_score.text ?? "0"
+        url_link += "&drivercontrolled="
+        url_link += driver_controlled_score.text ?? "0"
+        url_link += "&endgame="
+        url_link += endgame_score.text ?? "0"
+        url_link += "&location="
+        url_link += location
+        print(url_link)
+        let url = NSURL(string: url_link)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: url! as URL, completionHandler:
+            {(data, response, error) in
+            if (error != nil) { return; }
+            if let json = try? JSON(data: data!) {
+                if json["result"].string! == "error" {
+                    self.result_noti.text = "Can't submit high score, " + json["message"].string!
+                }
+                else {
+                    self.result_noti.text = "Successfully submitted the score, " + json["action"].string!
+                }
+            }
+        })
+        task.resume()
+    }
+    
+    @IBAction func location_printing(_ sender: UIButton) {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("Loction Enabled")
+            locationManager.startUpdatingLocation()
+        }
+        else {
+            print("Location is not enabled")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let user_location = locations[0] as CLLocation
+        let latitude = user_location.coordinate.latitude
+        let longtitude = user_location.coordinate.longitude
+        print(latitude)
+        print(longtitude)
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(user_location) { (placemarks, error) in
+            if (error != nil) {
+                print("Error in reverseGeocodeLocation")
+            }
+            let placemark = placemarks! as [CLPlacemark]
+            if placemark.count > 0 {
+                let placemark = placemarks![0]
+                
+                let locality = placemark.locality
+                let admistrativeArea = placemark.administrativeArea
+                let country = placemark.country
+                print(locality)
+                print(admistrativeArea)
+                print(country)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

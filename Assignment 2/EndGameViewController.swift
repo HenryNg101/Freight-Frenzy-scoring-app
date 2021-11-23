@@ -15,6 +15,9 @@ class EndGameViewController: UIViewController {
     @IBOutlet weak var shipping_hub_capped: UISwitch!
     @IBOutlet weak var end_parking_warehouse: UISwitch!
     @IBOutlet weak var end_completely_in_warehouse: UISwitch!
+    
+    var selected_record: DataManager.RegisterInfo? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
