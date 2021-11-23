@@ -914,6 +914,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Testing time"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNh-R9-oLa">
+                                <rect key="frame" x="180" y="692" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="go back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="GRp-Gk-ef0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0sr-fn-Jcr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -930,7 +938,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjQ-lQ-MY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3528" y="69"/>
+            <point key="canvasLocation" x="3527.5362318840585" y="68.973214285714278"/>
         </scene>
         <!--Driver-Controlled-->
         <scene sceneID="Kpx-lU-Amv">
@@ -1092,6 +1100,9 @@
             <point key="canvasLocation" x="1916" y="69"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bu5-eA-xMr"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="not_available_img.jpg" width="108" height="108"/>
         <image name="splash.png" width="219" height="230"/>

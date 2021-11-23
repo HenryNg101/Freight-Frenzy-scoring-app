@@ -20,7 +20,7 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.        
         let data_obj: DataManager = DataManager.shared
         let autonomous: Int = calculate_autonomous(data_obj)
         let driver_controlled: Int = calculate_driver_controlled(data_obj)

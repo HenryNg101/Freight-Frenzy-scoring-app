@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        
         //Load all high scores right before the view is loaded
         //There's a problem here, when I try open the high score page at first, it doesn't load, it only loads up at 2nd time
         var url = NSURL(string: "http://www.partiklezoo.com/freightfrenzy/?")
