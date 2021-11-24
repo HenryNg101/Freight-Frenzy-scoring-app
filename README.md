@@ -34,7 +34,7 @@ All of classes and functions that I developed:
   + imagePickerController(): Override standard function. Execute when user don't want to pick up picture (Click "Cancel")
   + AddTeam(): When user click button to register new team, check if the info is valid, if valid, add new team to core data. 
 
-- HighScoreViewController: 
+- HighScoreViewController: ViewController class for high score list that retrieved from API
   + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function. Execute when click on a row in table view.
   + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function. Decides number of rows of a table view.
   + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function. Used to load data to each cell.
@@ -42,29 +42,29 @@ All of classes and functions that I developed:
   + searchBarCancelButtonClicked(_ searchBar: UISearchBar): Override standard function. Execute when user cancel searching (Click "Cancel")
   + touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?): Override standard function. Execute when user touch anywhere.
 
-- HighScoreTableViewCell:
+- HighScoreTableViewCell: Represent for each cell in the high score table view. (Actually, I didn't do anything with this one)
   
-- HighScoreTeamViewController:
-  + check_profile(): 
+- HighScoreTeamViewController: Represent for a team that is selected from high score list.
+  + check_profile(): Change user location based on the difference between location from high score list and team list retrieved from API.
   
-- RegisteredTeamsViewController:
-  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function.
-  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function.
-  + searchBar(_ searchBar: UISearchBar, textDidChange searchText: String): Override standard function.
-  + searchBarCancelButtonClicked(_ searchBar: UISearchBar): Override standard function.
-  + touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?): Override standard function.
+- RegisteredTeamsViewController: ViewController class for Registered teams view, show all teams that are registered already
+  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function. Execute when click on a row in table view.
+  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function. Used to decide the number of rows of the table view.
+  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function. Used to define cell content.
+  + searchBar(_ searchBar: UISearchBar, textDidChange searchText: String): Override standard function. Execute when user type something on search bar (whenever there's any change) to search for team ID.
+  + searchBarCancelButtonClicked(_ searchBar: UISearchBar): Override standard function. Execute when user cancel searching (Click "Cancel"). 
+  + touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?): Override standard function. Execute when user click somewhere else that's not in the text field of the search bar.
   
-- TeamProfilesViewController:
-  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function.
-  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function.
-  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function.
-  + searchBar(_ searchBar: UISearchBar, textDidChange searchText: String): Override standard function.
-  + searchBarCancelButtonClicked(_ searchBar: UISearchBar): Override standard function.
-  + touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?): Override standard function.
+- TeamProfilesViewController: ViewController class for team profiles view, show all teams that are registered already with their record.
+  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function. Execute when click on a row in table view.
+  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function. Used to decide the number of rows of the table view.
+  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function. Used to set content for each cell/row.
+  + searchBar(_ searchBar: UISearchBar, textDidChange searchText: String): Override standard function. Executed when there's any change on the search bar (User typing), allow user to search for team ID.
+  + searchBarCancelButtonClicked(_ searchBar: UISearchBar): Override standard function. Executed when user cancel searching (Click "Cancel")
+  + touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?): Override standard function. Executed when user click somewhere else
   
-- TeamProfileViewController:
-  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function.
-  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function.
-  + tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat: Override standard function.
-  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function.
+- TeamProfileViewController: ViewController class for a team profile view, show selected team profile on all team profile
+  + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath): Override standard function. Execute when click on a row in table view.
+  + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int: Override standard function. Used to decide the number of rows of the table view.
+  + tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat: Override standard function. used to decide the height of each cell (So I can write more details to each cell).
+  + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell: Override standard function. Used to set content for each cell/row.
