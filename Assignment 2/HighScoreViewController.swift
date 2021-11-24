@@ -55,7 +55,6 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.endEditing(true)
     }
     
-    //Hide the keyboard when click somewhere out of search bar
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

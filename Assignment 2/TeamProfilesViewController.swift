@@ -7,9 +7,14 @@
 
 import UIKit
 
-class TeamProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    var searchTeamID = [String]()
+    var searching = false
+    var teamid_list = [String]()
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.shared.selectedTeam = DataManager.shared.registered_profiles[indexPath.row]
         DataManager.shared.selected_team_scores = []
@@ -21,21 +26,55 @@ class TeamProfilesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.shared.registered_profiles.count
+        if searching {
+            return searchTeamID.count
+        }
+        else {
+            return DataManager.shared.registered_profiles.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamProfile", for: indexPath)
-        cell.textLabel?.text = DataManager.shared.registered_profiles[indexPath.row].id
+        if searching {
+            cell.textLabel?.text = searchTeamID[indexPath.row]
+        }
+        else {
+            cell.textLabel?.text = DataManager.shared.registered_profiles[indexPath.row].id
+        }
         return cell
+    }
+    
+    //Override search bar functions
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTeamID = teamid_list.filter({$0.prefix(searchText.count) == searchText})
+        searching = true
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+        self.view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        for element in DataManager.shared.registered_profiles {
+            teamid_list.append(element.id)
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        searchBar.delegate = self
     }
     
 
