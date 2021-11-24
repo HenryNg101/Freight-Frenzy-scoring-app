@@ -9,6 +9,7 @@ import UIKit
 
 class HighScoreTeamViewController: UIViewController {
 
+    @IBOutlet weak var id: UILabel!
     @IBOutlet weak var team_id: UILabel!
     @IBOutlet weak var team_name: UILabel!
     @IBOutlet weak var created_time: UILabel!
@@ -37,6 +38,7 @@ class HighScoreTeamViewController: UIViewController {
         let selected_record = DataManager.shared.selectedHighScoreTeam
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        id.text = selected_record?.id
         team_id.text = selected_record?.team_id
         team_name.text = profile?.name
         created_time.text = profile?.created_time

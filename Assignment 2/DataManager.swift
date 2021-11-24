@@ -78,6 +78,19 @@ class DataManager: NSObject {
     var high_scores: [HighScoreTeam] = []
     var all_teams: [TeamInfo] = []
     
+    //All team's scores
+    struct TeamScores {
+        var team_id: String
+        var name: String
+        var autonomous: String
+        var drivercontrolled: String
+        var endgame: String
+        var location: String
+        var createdtime: String
+    }
+    var teamscores: [TeamScores] = []
+    var selected_team_scores: [TeamScores] = []
+    
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override init() {
@@ -90,7 +103,7 @@ class DataManager: NSObject {
     
     //This function is only used when I need to reset my database, for testing and development. So, whenever the core data is messed up, call this method in init() and its done.
     func deleteAllInfo() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Team_Info")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Team_Scores")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try managedContext.persistentStoreCoordinator?.execute(deleteRequest, with: managedContext)
@@ -101,7 +114,19 @@ class DataManager: NSObject {
     
     //Register new team, add the new team to the Core Data
     func addteamInfo(teamName: String, teamID: String, location: String, robotName: String, image: Data, allow_sharing: Bool) {
-        let newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image, allow_sharing: allow_sharing)
+        var newInfo = RegisterInfo(name: teamName, id: teamID, region: location, robotName: robotName, image: image, allow_sharing: allow_sharing)
+        //Reset info to more exact and specific info
+        if newInfo.region == "" {
+            newInfo.region = "N/A"
+        }
+        if newInfo.robotName == "" {
+            newInfo.robotName = "N/A"
+        }
+        if newInfo.image == UIImage(named: "upload_image.png")?.pngData() {
+            newInfo.image = UIImage(named: "not_available_img.png")?.pngData() ?? Data()
+        }
+        
+        
         var check = true
         for profile in registered_profiles {
             if profile.id == newInfo.id && profile.name == newInfo.name {
@@ -129,7 +154,7 @@ class DataManager: NSObject {
     }
     
     func loadTeamInfosFromCoreData(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
+        var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
         do {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
@@ -145,6 +170,29 @@ class DataManager: NSObject {
                 
                 //Load data from Core Data
                 registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data, allow_sharing: record.value(forKey: "allow_sharing") as! Bool))
+            }
+        }
+        catch let error as NSError {
+            print("Could not load. \(error), \(error.userInfo)")
+        }
+        
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Scores")
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            for result in results {
+                let record = result as! NSManagedObject
+                
+                //print for debugging purpose
+                print(record.value(forKey: "teamName") as! String)
+                print(record.value(forKey: "teamID") as! String)
+                print(record.value(forKey: "location") as! String)
+                print(record.value(forKey: "endgame") as! String)
+                print(record.value(forKey: "drivercontrolled") as! String)
+                print(record.value(forKey: "created_time") as! String)
+                print(record.value(forKey: "autonomous") as! String)
+                
+                //Load data from Core Data
+                teamscores.append(TeamScores(team_id: record.value(forKey: "teamID") as! String, name: record.value(forKey: "teamName") as! String, autonomous: record.value(forKey: "autonomous") as! String, drivercontrolled: record.value(forKey: "drivercontrolled") as! String, endgame: record.value(forKey: "endgame") as! String, location: record.value(forKey: "location") as! String, createdtime: record.value(forKey: "created_time") as! String))
             }
         }
         catch let error as NSError {

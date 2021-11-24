@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class ScoreViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -16,9 +17,15 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var total_score: UILabel!
     @IBOutlet weak var submit_score: UIButton!
     @IBOutlet weak var result_noti: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var submit_question: UILabel!
+    
+    var locationManager: CLLocationManager!
+    var location: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.isHidden = true
 
         // Do any additional setup after loading the view.        
         let data_obj: DataManager = DataManager.shared
@@ -35,8 +42,23 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
         endgame_score.text = String(endgame)
         total_score.text = String(total)
         
+        //For taking location
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("Loction Enabled")
+            locationManager.startUpdatingLocation()
+        }
+        else {
+            print("Location is not enabled")
+        }
+        
         //Only allow sharing for teams that choose allow sharing
         if !(DataManager.shared.selectedTeam?.allow_sharing ?? false) {
+            submit_question.isHidden = true
             submit_score.isEnabled = false
             submit_score.isHidden = true
         }
@@ -71,10 +93,17 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
 
     //When user want to submit high score to the website
     @IBAction func submit_score(_ sender: UIButton) {
+        //loading Activity Indicator when user wait for result of upload score.
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
         let team_id: String = DataManager.shared.selectedTeam?.id ?? ""
-        let location: String = DataManager.shared.selectedTeam?.region ?? ""
-        print(team_id)
-        print(location)
+        
+        //URL encoding the location, since the user can enter anything here.
+        var location: String = DataManager.shared.selectedTeam?.region ?? ""
+        location = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+
+        //API processing
         var url_link: String = "https://www.partiklezoo.com/freightfrenzy/?action=addscore&teamid=" + team_id
         url_link += "&autonomous="
         url_link += autonomous_score.text ?? "0"
@@ -92,6 +121,9 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
             {(data, response, error) in
             if (error != nil) { return; }
             if let json = try? JSON(data: data!) {
+                //Hide the activity indicator, then show result
+                self.spinner.stopAnimating()
+                
                 if json["result"].string! == "error" {
                     self.result_noti.text = "Can't submit high score, " + json["message"].string!
                 }
@@ -103,28 +135,14 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
         task.resume()
     }
     
-    @IBAction func location_printing(_ sender: UIButton) {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            print("Loction Enabled")
-            locationManager.startUpdatingLocation()
-        }
-        else {
-            print("Location is not enabled")
-        }
-    }
-    
+    //Take location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let user_location = locations[0] as CLLocation
+        /*
         let latitude = user_location.coordinate.latitude
         let longtitude = user_location.coordinate.longitude
-        print(latitude)
-        print(longtitude)
-        
+        */
+ 
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(user_location) { (placemarks, error) in
             if (error != nil) {
@@ -134,13 +152,50 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
             if placemark.count > 0 {
                 let placemark = placemarks![0]
                 
-                let locality = placemark.locality
-                let admistrativeArea = placemark.administrativeArea
-                let country = placemark.country
-                print(locality)
-                print(admistrativeArea)
-                print(country)
+                //Information I'll use: name + locality + administrativeArea + postalCode + country
+                self.location += placemark.name ?? ""
+                self.location += ", "
+                self.location += placemark.locality ?? ""
+                self.location += ", "
+                self.location += placemark.administrativeArea ?? ""
+                self.location += " "
+                self.location += placemark.postalCode ?? ""
+                self.location += ", "
+                self.location += placemark.country ?? ""
             }
+        }
+    }
+    
+    @IBAction func Saving_game_info(_ sender: UIButton) {
+        //Take team info
+        let team_id: String = DataManager.shared.selectedTeam?.id ?? ""
+        let team_name: String = DataManager.shared.selectedTeam?.name ?? ""
+        
+        //Take the current time
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss a dd/MM/yyyy"
+        let time = formatter.string(from: date)
+        
+        //Saving data to Core Data
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Team_Scores", in: managedContext)
+        let info = NSManagedObject(entity: entity!, insertInto: managedContext)
+        
+        info.setValue(team_name, forKey: "teamName")
+        info.setValue(team_id, forKey: "teamID")
+        info.setValue(self.location, forKey: "location")
+        info.setValue(endgame_score.text ?? "0", forKey: "endgame")
+        info.setValue(driver_controlled_score.text ?? "0", forKey: "drivercontrolled")
+        info.setValue(autonomous_score.text ?? "0", forKey: "autonomous")
+        info.setValue(time, forKey: "created_time")
+        
+        do {
+            try managedContext.save()
+            DataManager.shared.teamscores.append(DataManager.TeamScores(team_id: team_id, name: team_name, autonomous: autonomous_score.text ?? "", drivercontrolled: driver_controlled_score.text ?? "0", endgame: endgame_score.text ?? "0", location: self.location, createdtime: time))
+        }
+        catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
     /*

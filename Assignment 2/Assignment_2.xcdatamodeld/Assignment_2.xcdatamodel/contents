@@ -8,9 +8,17 @@
         <attribute name="teamID" optional="YES" attributeType="String"/>
         <attribute name="teamName" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Team_Scores" representedClassName="Team_Scores" syncable="YES" codeGenerationType="class"/>
+    <entity name="Team_Scores" representedClassName="Team_Scores" syncable="YES" codeGenerationType="class">
+        <attribute name="autonomous" optional="YES" attributeType="String"/>
+        <attribute name="created_time" optional="YES" attributeType="String"/>
+        <attribute name="drivercontrolled" optional="YES" attributeType="String"/>
+        <attribute name="endgame" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="teamID" optional="YES" attributeType="String"/>
+        <attribute name="teamName" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Team_Info" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="Team_Scores" positionX="-63" positionY="36" width="128" height="29"/>
+        <element name="Team_Scores" positionX="-63" positionY="36" width="128" height="134"/>
     </elements>
 </model>

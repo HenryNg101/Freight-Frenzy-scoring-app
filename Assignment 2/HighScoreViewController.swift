@@ -8,10 +8,10 @@
 import UIKit
 
 class HighScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
-    var teamid_list = [String]()
-    var filtered_teamid = [String]()
+    
+    var searchTeamID = [String]()
     var searching = false
+    var teamid_list = [String]()
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +21,7 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-            return filtered_teamid.count
+            return searchTeamID.count
         }
         else {
             return DataManager.shared.high_scores.count
@@ -31,7 +31,7 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HighScoreCell", for: indexPath)
         if searching {
-            cell.textLabel?.text = filtered_teamid[indexPath.row]
+            cell.textLabel?.text = String(indexPath.row) + "            " + searchTeamID[indexPath.row]
         }
         else {
             cell.textLabel?.text = String(indexPath.row) + "            " + DataManager.shared.high_scores[indexPath.row].id
@@ -43,9 +43,21 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //Override search bar functions
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered_teamid = teamid_list.filter({$0.prefix(searchText.count) == searchText})
+        searchTeamID = teamid_list.filter({$0.prefix(searchText.count) == searchText})
         searching = true
         tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+        self.view.endEditing(true)
+    }
+    
+    //Hide the keyboard when click somewhere out of search bar
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidLoad() {        
@@ -53,10 +65,12 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
 
         // Do any additional setup after loading the view.
         for element in DataManager.shared.high_scores {
-            teamid_list.append(element.team_id)
+            teamid_list.append(element.id)
         }
         tableView.delegate = self
         tableView.dataSource = self
+        
+        searchBar.delegate = self
     }
     
 

@@ -1,25 +1,31 @@
 //
-//  RegisteredTeamsViewController.swift
+//  TeamProfilesViewController.swift
 //  Assignment 2
 //
-//  Created by user928878 on 11/21/21.
+//  Created by Nguyen, Quoc Hung - nguqy034 on 24/11/21.
 //
 
 import UIKit
 
-class RegisteredTeamsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class TeamProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataManager.shared.selectedTeam = DataManager.shared.registered_profiles[indexPath.row]
+        DataManager.shared.selected_team_scores = []
+        for team_record in DataManager.shared.teamscores {
+            if team_record.team_id == DataManager.shared.selectedTeam?.id && team_record.name == DataManager.shared.selectedTeam?.name {
+                DataManager.shared.selected_team_scores.append(team_record)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        DataManager.shared.registered_profiles.count
+        return DataManager.shared.registered_profiles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RegisteredProfile", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamProfile", for: indexPath)
         cell.textLabel?.text = DataManager.shared.registered_profiles[indexPath.row].id
         return cell
     }
