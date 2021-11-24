@@ -5,6 +5,7 @@
 //  Created by Nguyen, Quoc Hung - nguqy034 on 18/11/21.
 //
 
+
 import UIKit
 
 class AutonomousViewController: UIViewController {
@@ -23,6 +24,7 @@ class AutonomousViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Keep the state like how it's saved in DataManager
         duck_delivered.setOn(DataManager.shared.duck_delivered, animated: false)
         parking_alliance_storage_unit.setOn(DataManager.shared.parking_alliance_storage_unit, animated: false)
         parking_storage_unit.setOn(DataManager.shared.parking_storage_unit, animated: false)
@@ -34,6 +36,7 @@ class AutonomousViewController: UIViewController {
         team_scoring_elem_used.setOn(DataManager.shared.team_scoring_elem_used, animated: false)
     }
     
+    //All of these below functions are used to set DataManager attributes
     @IBAction func duck_delivered_change(_ sender: UISwitch) {
         DataManager.shared.duck_delivered = sender.isOn
     }

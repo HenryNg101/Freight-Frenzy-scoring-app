@@ -19,6 +19,7 @@ class DriverControlledViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Keep the state like how it's saved in DataManager
         freight.text = String(DataManager.shared.freight)
         freight_l1.text = String(DataManager.shared.freight_l1)
         freight_l2.text = String(DataManager.shared.freight_l2)
@@ -26,6 +27,7 @@ class DriverControlledViewController: UIViewController {
         shared_hub_freight.text = String(DataManager.shared.shared_hub_freight)
     }
     
+    //All of these below functions are used to set DataManager attributes
     @IBAction func freight_change(_ sender: UIStepper) {
         let changed_val: Int = Int(sender.value)
         freight.text = String(changed_val)

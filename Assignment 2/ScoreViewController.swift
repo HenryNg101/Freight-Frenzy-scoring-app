@@ -4,6 +4,7 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 18/11/21.
 //
+// For the final score view scene, submitting score to website, viewing and saving score.
 
 import UIKit
 import CoreLocation
@@ -91,7 +92,7 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
         return shared_hub_tipped_score + shipping_hub_balanced_score + shipping_hub_capped_score + end_parking_warehouse_score + end_completely_in_warehouse_score + data.ducks_delivered
     }
 
-    //When user want to submit high score to the website
+    //When user want to submit high score to the website (Only available when user allow sharing at the beginning
     @IBAction func submit_score(_ sender: UIButton) {
         //loading Activity Indicator when user wait for result of upload score.
         spinner.isHidden = false
@@ -135,13 +136,9 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
         task.resume()
     }
     
-    //Take location
+    //Take current location of user
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let user_location = locations[0] as CLLocation
-        /*
-        let latitude = user_location.coordinate.latitude
-        let longtitude = user_location.coordinate.longitude
-        */
  
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(user_location) { (placemarks, error) in
@@ -152,7 +149,7 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
             if placemark.count > 0 {
                 let placemark = placemarks![0]
                 
-                //Information I'll use: name + locality + administrativeArea + postalCode + country
+                self.location = ""
                 self.location += placemark.name ?? ""
                 self.location += ", "
                 self.location += placemark.locality ?? ""
@@ -166,6 +163,7 @@ class ScoreViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    //Save all of user info: time, location, score, image.
     @IBAction func Saving_game_info(_ sender: UIButton) {
         //Take team info
         let team_id: String = DataManager.shared.selectedTeam?.id ?? ""

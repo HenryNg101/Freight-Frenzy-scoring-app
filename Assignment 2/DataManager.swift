@@ -4,19 +4,20 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 18/11/21.
 //
+// This file is used to manage all of data, and allow singleton, to keep data intact when using application
 
 import UIKit
 import CoreData
 
 class DataManager: NSObject {
     static let shared = DataManager()
-    //Total score
+    //Total score for a game
     var total_score: Int = 0
     var autonomous_score: Int = 0
     var driver_controlled_score: Int = 0
     var endgame_score: Int = 0
     
-    //Stage 1
+    //Stage 1 score components
     var duck_delivered: Bool = false
     var parking_alliance_storage_unit: Bool = false
     var parking_storage_unit: Bool = false
@@ -27,14 +28,14 @@ class DataManager: NSObject {
     var duck_used: Bool = false
     var team_scoring_elem_used: Bool = false
  
-    //Stage 2
+    //Stage 2 score components
     var freight: Int = 0
     var freight_l1: Int = 0
     var freight_l2: Int = 0
     var freight_l3: Int = 0
     var shared_hub_freight: Int = 0
     
-    //Stage 3
+    //Stage 3 score components
     var ducks_delivered: Int = 0
     var shared_hub_tipped: Bool = false
     var shipping_hub_balanced: Bool = false
@@ -42,7 +43,7 @@ class DataManager: NSObject {
     var end_parking_warehouse: Bool = false
     var end_completely_in_warehouse: Bool = false
     
-    //Team info (For registering)
+    //Team info (When registering)
     struct RegisterInfo {
         var name: String
         var id: String
@@ -53,11 +54,11 @@ class DataManager: NSObject {
     }
     var registered_profiles: [RegisterInfo] = []
     
-    //Selected Team
+    //Selected registered team and team in high score list
     var selectedTeam: RegisterInfo? = nil
     var selectedHighScoreTeam: HighScoreTeam? = nil
     
-    //High scores
+    //High scores and team info collected from the web API (not the one registered in the app)
     //One more note, there are more teams in total than teams in highscore list (427 vs 100)
     struct TeamInfo {
         var id: String
@@ -78,7 +79,7 @@ class DataManager: NSObject {
     var high_scores: [HighScoreTeam] = []
     var all_teams: [TeamInfo] = []
     
-    //All team's scores
+    //All registered team's scores
     struct TeamScores {
         var team_id: String
         var name: String
@@ -91,6 +92,7 @@ class DataManager: NSObject {
     var teamscores: [TeamScores] = []
     var selected_team_scores: [TeamScores] = []
     
+    //Context for the Core Data
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override init() {
@@ -101,7 +103,7 @@ class DataManager: NSObject {
         //deleteAllInfo()
     }
     
-    //This function is only used when I need to reset my database, for testing and development. So, whenever the core data is messed up, call this method in init() and its done.
+    //This function is only used when I need to reset my database, for testing and development. So, whenever the core data is messed up, choose the entity in entityName attribute in NSFetchRequest(), call this method in init() and its done.
     func deleteAllInfo() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Team_Scores")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -126,47 +128,34 @@ class DataManager: NSObject {
             newInfo.image = UIImage(named: "not_available_img.png")?.pngData() ?? Data()
         }
         
-        
-        var check = true
-        for profile in registered_profiles {
-            if profile.id == newInfo.id && profile.name == newInfo.name {
-                check = false
-            }
-        }
-        if check {
-            let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
-            let info = NSManagedObject(entity: entity!, insertInto: managedContext)
-            info.setValue(newInfo.image, forKey: "image")
-            info.setValue(newInfo.region, forKey: "region")
-            info.setValue(newInfo.robotName, forKey: "robotName")
-            info.setValue(newInfo.id, forKey: "teamID")
-            info.setValue(newInfo.name, forKey: "teamName")
-            info.setValue(newInfo.allow_sharing, forKey: "allow_sharing")
+        //Add new team info to the Core Data
+        let entity = NSEntityDescription.entity(forEntityName: "Team_Info", in: managedContext)
+        let info = NSManagedObject(entity: entity!, insertInto: managedContext)
+        info.setValue(newInfo.image, forKey: "image")
+        info.setValue(newInfo.region, forKey: "region")
+        info.setValue(newInfo.robotName, forKey: "robotName")
+        info.setValue(newInfo.id, forKey: "teamID")
+        info.setValue(newInfo.name, forKey: "teamName")
+        info.setValue(newInfo.allow_sharing, forKey: "allow_sharing")
             
-            do {
-                try managedContext.save()
-                registered_profiles.append(newInfo)
-            }
-            catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
+        do {
+            try managedContext.save()
+            registered_profiles.append(newInfo)
+        }
+        catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
     
+    //Load all data from Core Data to DataManager attribute
     func loadTeamInfosFromCoreData(){
+        
+        //Load all of registered teams
         var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Info")
         do {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
                 let record = result as! NSManagedObject
-                
-                //print for debugging purpose
-                print(UIImage(data: record.value(forKey: "image") as! Data))
-                print(record.value(forKey: "region") as! String)
-                print(record.value(forKey: "robotName") as! String)
-                print(record.value(forKey: "teamID") as! String)
-                print(record.value(forKey: "teamName") as! String)
-                print(record.value(forKey: "allow_sharing") as! Bool)
                 
                 //Load data from Core Data
                 registered_profiles.append(RegisterInfo(name: record.value(forKey: "teamName") as! String, id: record.value(forKey: "teamID") as! String, region: record.value(forKey: "region") as! String, robotName: record.value(forKey: "robotName") as! String, image: record.value(forKey: "image") as! Data, allow_sharing: record.value(forKey: "allow_sharing") as! Bool))
@@ -176,21 +165,13 @@ class DataManager: NSObject {
             print("Could not load. \(error), \(error.userInfo)")
         }
         
+        //Load all team's scores, for every team, every time they play a game
         fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Team_Scores")
         do {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
                 let record = result as! NSManagedObject
-                
-                //print for debugging purpose
-                print(record.value(forKey: "teamName") as! String)
-                print(record.value(forKey: "teamID") as! String)
-                print(record.value(forKey: "location") as! String)
-                print(record.value(forKey: "endgame") as! String)
-                print(record.value(forKey: "drivercontrolled") as! String)
-                print(record.value(forKey: "created_time") as! String)
-                print(record.value(forKey: "autonomous") as! String)
-                
+
                 //Load data from Core Data
                 teamscores.append(TeamScores(team_id: record.value(forKey: "teamID") as! String, name: record.value(forKey: "teamName") as! String, autonomous: record.value(forKey: "autonomous") as! String, drivercontrolled: record.value(forKey: "drivercontrolled") as! String, endgame: record.value(forKey: "endgame") as! String, location: record.value(forKey: "location") as! String, createdtime: record.value(forKey: "created_time") as! String))
             }

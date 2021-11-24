@@ -10,10 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+        //Preprocess before the view is loaded
+        //Hide the back button in root view, which is this view controller.
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         //Load all high scores right before the view is loaded
-        //There's a problem here, when I try open the high score page at first, it doesn't load, it only loads up at 2nd time
         var url = NSURL(string: "http://www.partiklezoo.com/freightfrenzy/?")
         let config = URLSessionConfiguration.default
         var session = URLSession(configuration: config)
@@ -29,7 +30,7 @@ class ViewController: UIViewController {
         })
         task.resume()
         
-        //All teams, include the one that has no high score.
+        //Load all teams on the website, include the one that has no high score.
         url = NSURL(string: "http://www.partiklezoo.com/freightfrenzy/?action=teams")
         session = URLSession(configuration: config)
         task = session.dataTask(with: url! as URL, completionHandler:

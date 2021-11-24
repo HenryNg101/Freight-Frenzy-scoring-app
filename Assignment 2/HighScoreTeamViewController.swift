@@ -4,6 +4,7 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 20/11/21.
 //
+//Display info of a single team that has high score on top 100
 
 import UIKit
 
@@ -20,6 +21,7 @@ class HighScoreTeamViewController: UIViewController {
     @IBOutlet weak var endgame: UILabel!
     @IBOutlet weak var total_score: UILabel!
     
+    //Change location of the team to one, since the location of the team in high score list and team list on website are not synchronized
     func check_profile() -> DataManager.TeamInfo?{
         for profile in DataManager.shared.all_teams{
             if profile.id == DataManager.shared.selectedHighScoreTeam?.team_id {
@@ -32,7 +34,7 @@ class HighScoreTeamViewController: UIViewController {
         return nil
     }
     
-    //Same problem, it doesn't load up the first time, it always load the last click result
+    // After load, set all of text label content to desired content
     override func viewDidLoad() {
         let profile = check_profile()
         let selected_record = DataManager.shared.selectedHighScoreTeam

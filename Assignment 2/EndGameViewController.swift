@@ -22,14 +22,7 @@ class EndGameViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        /*
-        var ducks_delivered: Int = 0
-        var shared_hub_tipped: Bool = false
-        var shipping_hub_balanced: Bool = false
-        var shipping_hub_capped: Bool = false
-        var end_parking_warehouse: Bool = false
-        var end_completely_in_warehouse: Bool = false
-        */
+        // Keep the state like how it's saved in DataManager
         shared_hub_tipped.setOn(DataManager.shared.shared_hub_tipped, animated: false)
         shipping_hub_balanced.setOn(DataManager.shared.shipping_hub_balanced, animated: false)
         shipping_hub_capped.setOn(DataManager.shared.shipping_hub_capped, animated: false)
@@ -37,12 +30,12 @@ class EndGameViewController: UIViewController {
         end_completely_in_warehouse.setOn(DataManager.shared.end_completely_in_warehouse, animated: false)
     }
     
+    //All of these below functions are used to set DataManager attributes
     @IBAction func ducks_delivered_change(_ sender: UIStepper) {
         let changed_val: Int = Int(sender.value)
         ducks_delivered.text = String(changed_val)
         DataManager.shared.ducks_delivered = changed_val
     }
-    
     @IBAction func shared_hub_tipped_change(_ sender: UISwitch) {
         DataManager.shared.shared_hub_tipped = sender.isOn
     }

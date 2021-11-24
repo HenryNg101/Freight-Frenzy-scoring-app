@@ -4,6 +4,7 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 24/11/21.
 //
+//
 
 import UIKit
 
@@ -23,11 +24,12 @@ class TeamProfileViewController: UIViewController, UITableViewDelegate, UITableV
         return DataManager.shared.selected_team_scores.count
     }
     
+    //Set the height of a table view cell
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 220
+
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamRecord", for: indexPath)
         cell.textLabel?.numberOfLines = 0

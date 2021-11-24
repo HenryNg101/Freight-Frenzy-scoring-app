@@ -4,6 +4,7 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 24/11/21.
 //
+//Show all team's profiles
 
 import UIKit
 

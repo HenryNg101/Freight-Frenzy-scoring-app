@@ -55,6 +55,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
         }
     }
     
+    //After finishing picking up the image, it will set the image of the image view to the selected image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         dismiss(animated: true, completion: nil)
@@ -64,6 +65,7 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
+    //check if the info is valid or not
     @IBAction func AddTeam(_ sender: UIButton) {
         if (teamName.text != nil && teamName.text != "") && (teamID.text != nil && teamID.text != "") {
             if teamID.text?.count == 5 && Int(teamID.text ?? "") != nil {

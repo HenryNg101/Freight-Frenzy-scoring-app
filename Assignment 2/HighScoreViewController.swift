@@ -4,13 +4,14 @@
 //
 //  Created by Nguyen, Quoc Hung - nguqy034 on 20/11/21.
 //
+// Used to display all high scores and search for high score
 
 import UIKit
 
 class HighScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     var searchTeamID = [String]()
-    var searching = false
+    var searching = false           //Notify when the table is in search or not
     var teamid_list = [String]()
     
     @IBOutlet weak var searchBar: UISearchBar!

@@ -4,6 +4,7 @@
 //
 //  Created by user928878 on 11/21/21.
 //
+//Class used for all teams that are registered.
 
 import UIKit
 
