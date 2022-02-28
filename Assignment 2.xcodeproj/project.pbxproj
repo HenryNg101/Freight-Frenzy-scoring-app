@@ -13,6 +13,10 @@
 		97289C2D274DFC2D00BF9DA0 /* not_available_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 97289C2C274DFC2D00BF9DA0 /* not_available_img.png */; };
 		972BC30027466C910042C7A1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BC2FF27466C910042C7A1 /* RegisterViewController.swift */; };
 		976D5C8A27463DF800A400D4 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D5C8927463DF800A400D4 /* ScoreViewController.swift */; };
+		976D680027CD8E5E00BD7A3E /* Nav3.png in Resources */ = {isa = PBXBuildFile; fileRef = 976D67FF27CD8E5E00BD7A3E /* Nav3.png */; };
+		976D680527CD8E6600BD7A3E /* Nav2.png in Resources */ = {isa = PBXBuildFile; fileRef = 976D680427CD8E6600BD7A3E /* Nav2.png */; };
+		976D680A27CD8E6B00BD7A3E /* Nav1.png in Resources */ = {isa = PBXBuildFile; fileRef = 976D680927CD8E6B00BD7A3E /* Nav1.png */; };
+		976D680F27CD90A000BD7A3E /* Screen Recording 2022-03-01 at 9.46.27 am.mov in Resources */ = {isa = PBXBuildFile; fileRef = 976D680E27CD90A000BD7A3E /* Screen Recording 2022-03-01 at 9.46.27 am.mov */; };
 		97A35F952748A48C00B6AA0C /* HighScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A35F942748A48C00B6AA0C /* HighScoreViewController.swift */; };
 		97A35F9A2748AE5000B6AA0C /* HighScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A35F992748AE5000B6AA0C /* HighScoreTableViewCell.swift */; };
 		97A35FA22748D28A00B6AA0C /* HighScoreTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A35FA12748D28A00B6AA0C /* HighScoreTeamViewController.swift */; };
@@ -58,6 +62,10 @@
 		97289C2C274DFC2D00BF9DA0 /* not_available_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = not_available_img.png; sourceTree = "<group>"; };
 		972BC2FF27466C910042C7A1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		976D5C8927463DF800A400D4 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		976D67FF27CD8E5E00BD7A3E /* Nav3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Nav3.png; path = ../../Desktop/Nav3.png; sourceTree = "<group>"; };
+		976D680427CD8E6600BD7A3E /* Nav2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Nav2.png; path = ../../Desktop/Nav2.png; sourceTree = "<group>"; };
+		976D680927CD8E6B00BD7A3E /* Nav1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Nav1.png; path = ../../Desktop/Nav1.png; sourceTree = "<group>"; };
+		976D680E27CD90A000BD7A3E /* Screen Recording 2022-03-01 at 9.46.27 am.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "Screen Recording 2022-03-01 at 9.46.27 am.mov"; path = "../../Desktop/Screen Recording 2022-03-01 at 9.46.27 am.mov"; sourceTree = "<group>"; };
 		97A35F942748A48C00B6AA0C /* HighScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreViewController.swift; sourceTree = "<group>"; };
 		97A35F992748AE5000B6AA0C /* HighScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreTableViewCell.swift; sourceTree = "<group>"; };
 		97A35FA12748D28A00B6AA0C /* HighScoreTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreTeamViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +121,10 @@
 		97E3BDE2274601B60093A544 = {
 			isa = PBXGroup;
 			children = (
+				976D680E27CD90A000BD7A3E /* Screen Recording 2022-03-01 at 9.46.27 am.mov */,
+				976D680927CD8E6B00BD7A3E /* Nav1.png */,
+				976D680427CD8E6600BD7A3E /* Nav2.png */,
+				976D67FF27CD8E5E00BD7A3E /* Nav3.png */,
 				97289C2C274DFC2D00BF9DA0 /* not_available_img.png */,
 				97AB69DE274884DB00ACF47D /* upload_image.png */,
 				97E3BE24274607E80093A544 /* splash.png */,
@@ -282,10 +294,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976D680A27CD8E6B00BD7A3E /* Nav1.png in Resources */,
 				97E3BE25274607E80093A544 /* splash.png in Resources */,
 				97E3BDFE274601B70093A544 /* LaunchScreen.storyboard in Resources */,
+				976D680F27CD90A000BD7A3E /* Screen Recording 2022-03-01 at 9.46.27 am.mov in Resources */,
+				976D680527CD8E6600BD7A3E /* Nav2.png in Resources */,
 				97E3BDFB274601B70093A544 /* Assets.xcassets in Resources */,
 				97AB69DF274884DB00ACF47D /* upload_image.png in Resources */,
+				976D680027CD8E5E00BD7A3E /* Nav3.png in Resources */,
 				97E3BDF6274601B60093A544 /* Main.storyboard in Resources */,
 				97289C2D274DFC2D00BF9DA0 /* not_available_img.png in Resources */,
 			);
