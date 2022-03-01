@@ -1,6 +1,8 @@
 # Freight Frenzy scoring iOS app
 This is the iOS app I developed for FIRST TECH challenge.
 
+You can see the app's demo [here](https://youtu.be/2YIDgfyraLM)
+
 App's navigation board:
 
 ![Navigation 1](https://github.com/HenryNg101/Freight-Frenzy-scoring-iOS-app/blob/master/Nav1.png)
