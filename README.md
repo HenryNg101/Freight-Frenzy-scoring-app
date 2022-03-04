@@ -9,7 +9,7 @@ API provided, and the list of high scores is displayed using Table View. You can
 
 You can see the app's demo [here](https://youtu.be/2YIDgfyraLM)
 
-App's navigation board:
+App's navigation pattern:
 
 ![Navigation 1](https://github.com/HenryNg101/Freight-Frenzy-scoring-iOS-app/blob/master/Nav1.png)
 
